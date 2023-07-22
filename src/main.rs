@@ -3,6 +3,7 @@ use std::time::Duration;
 
 // Import apps
 use crate::apps::pikachu;
+use crate::apps::clock;
 
 pub mod apps;
 
@@ -15,6 +16,7 @@ fn main() {
 
     // Init apps
     pikachu::init();
+    clock::init();
 
     // This loop is added to prevent the main thread from exiting immediately.
     // Since the `init` function spawns a new thread, without this loop, the main
