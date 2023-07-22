@@ -6,7 +6,7 @@ use awtrix_light_appserver::create_app;
 use awtrix_light_appserver::update_app;
 
 // Config
-const SLEEP_DURATION: u64 = 60; // Specify the sleep duration in seconds
+const SLEEP_DURATION: u64 = 30; // Specify the sleep duration in seconds
 
 // Init function
 pub fn init() {
@@ -25,7 +25,7 @@ fn main() {
     loop {
         update(); // Update function
 
-        // Introduce a delay of 1 second between each iteration
+        // Introduce a delay between each iteration
         thread::sleep(Duration::from_secs(SLEEP_DURATION));
     }
 }
