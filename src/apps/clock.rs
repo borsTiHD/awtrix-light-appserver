@@ -32,8 +32,6 @@ fn main() {
 
 // Update function
 fn update() {
-    println!("Update clock app...");
-
     // Get the current time in the local timezone
     // Format the time as "HH:MM"
     let local_time: DateTime<Local> = Local::now();
