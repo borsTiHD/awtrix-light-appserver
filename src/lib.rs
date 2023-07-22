@@ -1,3 +1,4 @@
+use std::env;
 use reqwest::header::CONTENT_TYPE;
 use reqwest::Client;
 use serde_derive::{Serialize, Deserialize};
@@ -18,7 +19,9 @@ pub async fn create_app(app_name: &str) -> Result<(), Box<dyn std::error::Error>
     let client: Client = Client::new();
 
     // The URL to which you want to send the POST request
-    let url: &str = "http://192.168.2.50/api/custom";
+    const ENDPOINT: &str = "/custom";
+    let base_url = env::var("BASE_URL").unwrap();
+    let url: String = format!("{}{}", base_url, ENDPOINT);
 
     // Send the POST request with the JSON payload as the body
     let response: reqwest::Response = client
@@ -61,7 +64,9 @@ pub async fn update_app(app_name: &str, app_text: &str, app_icon: i32) -> Result
     let client: Client = Client::new();
 
     // The URL to which you want to send the POST request
-    let url: &str = "http://192.168.2.50/api/custom";
+    const ENDPOINT: &str = "/custom";
+    let base_url = env::var("BASE_URL").unwrap();
+    let url: String = format!("{}{}", base_url, ENDPOINT);
 
     // Send the POST request with the JSON payload as the body
     let response: reqwest::Response = client
