@@ -9,9 +9,44 @@ struct Payload {
     icon: i32,
 }
 
+// Function to create an app
 #[tokio::main]
-pub async fn create_app(app_name: &str, app_text: &str, app_icon: i32) -> Result<(), Box<dyn std::error::Error>> {
+pub async fn create_app(app_name: &str) -> Result<(), Box<dyn std::error::Error>> {
     println!("Creating app {}...", app_name);
+
+    // Create a reqwest client
+    let client: Client = Client::new();
+
+    // The URL to which you want to send the POST request
+    let url: &str = "http://192.168.2.50/api/custom";
+
+    // Send the POST request with the JSON payload as the body
+    let response: reqwest::Response = client
+        .post(url)
+        .query(&[("name", app_name)]) // Add the query parameter
+        .header(CONTENT_TYPE, "application/json")
+        .body("") // Empty body
+        .send()
+        .await?;
+
+    // Check if the request was successful
+    if response.status().is_success() {
+        println!("Request was successful!");
+    } else {
+        println!("Request failed with status code: {}", response.status());
+    }
+
+    // Read the response body as a string
+    let response_body: String = response.text().await?;
+    println!("Response body: {}", response_body);
+
+    Ok(())
+}
+
+// Function to update an app
+#[tokio::main]
+pub async fn update_app(app_name: &str, app_text: &str, app_icon: i32) -> Result<(), Box<dyn std::error::Error>> {
+    println!("Updating app {}...", app_name);
 
     // Create an instance of the Payload struct with your desired values
     let payload = Payload {
