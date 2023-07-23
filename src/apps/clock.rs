@@ -1,6 +1,8 @@
 use chrono::prelude::*;
 use std::thread;
 use std::time::Duration;
+use serde_derive::{Serialize, Deserialize};
+use serde_json;
 
 use awtrix_light_appserver::create_app;
 use awtrix_light_appserver::update_app;
@@ -9,6 +11,12 @@ use awtrix_light_appserver::update_app;
 const APP_NAME: &str = "modern_clock";
 const APP_ICON: i32 = 1082; // Specify the app icon
 const SLEEP_DURATION: u64 = 30; // Specify the sleep duration in seconds
+
+#[derive(Serialize, Deserialize)]
+struct Payload {
+    text: String,
+    icon: i32,
+}
 
 // Init function
 pub fn init() {
@@ -42,6 +50,15 @@ fn update() {
     let local_time: DateTime<Local> = Local::now();
     let formatted_time: String = local_time.format("%H:%M").to_string();
 
+    // Create an instance of the Payload struct with your desired values
+    let payload: Payload = Payload {
+        text: formatted_time.to_string(),
+        icon: APP_ICON
+    };
+
+    // Serialize the payload into a JSON string
+    let json_payload: String = serde_json::to_string(&payload).unwrap();
+
     // Update app with current time
-    update_app(APP_NAME, &formatted_time, APP_ICON, None).unwrap();
+    update_app(APP_NAME, "", 0, Some(json_payload.as_str())).unwrap();
 }
