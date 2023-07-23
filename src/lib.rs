@@ -10,6 +10,9 @@ struct Payload {
     icon: i32,
 }
 
+// Endpoints
+const ENDPOINT_CUSTOM: &str = "/custom";
+
 // Function to create an app
 #[tokio::main]
 pub async fn create_app(app_name: &str) -> Result<(), Box<dyn std::error::Error>> {
@@ -19,9 +22,8 @@ pub async fn create_app(app_name: &str) -> Result<(), Box<dyn std::error::Error>
     let client: Client = Client::new();
 
     // The URL to which you want to send the POST request
-    const ENDPOINT: &str = "/custom";
     let base_url = env::var("BASE_URL").unwrap();
-    let url: String = format!("{}{}", base_url, ENDPOINT);
+    let url: String = format!("{}{}", base_url, ENDPOINT_CUSTOM);
 
     // Send the POST request with the JSON payload as the body
     let response: reqwest::Response = client
@@ -64,9 +66,8 @@ pub async fn update_app(app_name: &str, app_text: &str, app_icon: i32) -> Result
     let client: Client = Client::new();
 
     // The URL to which you want to send the POST request
-    const ENDPOINT: &str = "/custom";
     let base_url = env::var("BASE_URL").unwrap();
-    let url: String = format!("{}{}", base_url, ENDPOINT);
+    let url: String = format!("{}{}", base_url, ENDPOINT_CUSTOM);
 
     // Send the POST request with the JSON payload as the body
     let response: reqwest::Response = client
