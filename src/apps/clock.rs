@@ -15,8 +15,10 @@ const SLEEP_DURATION: u64 = 30; // Specify the sleep duration in seconds
 // Init function
 pub fn init() {
     // Creating app
+    let current_time: DateTime<Local> = Local::now();
+    let formatted_time: String = current_time.format("%H:%M").to_string();
     println!("--------------------------");
-    println!("Init app: {}", APP_NAME);
+    println!("[{}] | Init app: {}", formatted_time, APP_NAME);
     create_app(APP_NAME).unwrap();
     update();
 
@@ -28,8 +30,13 @@ pub fn init() {
 // Main function
 fn main() {
     loop {
+        // Get the current time and log the update
+        let current_time: DateTime<Local> = Local::now();
+        let formatted_time: String = current_time.format("%H:%M").to_string();
         println!("--------------------------");
-        println!("Updating app: {}", APP_NAME);    
+        println!("[{}] | Updating app: {}", formatted_time, APP_NAME);
+
+        // Update the app
         update();
 
         // Introduce a delay between each iteration
