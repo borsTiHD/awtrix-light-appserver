@@ -1,8 +1,8 @@
 use dotenv::dotenv;
 
 // Import apps
-use crate::apps::pikachu;
 use crate::apps::clock;
+use crate::apps::pikachu;
 
 pub mod apps;
 

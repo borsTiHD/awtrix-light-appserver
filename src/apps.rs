@@ -1,2 +1,2 @@
-pub mod pikachu;
 pub mod clock;
+pub mod pikachu;

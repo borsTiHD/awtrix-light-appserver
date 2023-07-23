@@ -1,6 +1,6 @@
+use chrono::prelude::*;
 use std::thread;
 use std::time::Duration;
-use chrono::prelude::*;
 
 use awtrix_light_appserver::create_app;
 use awtrix_light_appserver::update_app;
