@@ -43,5 +43,5 @@ fn update() {
     let formatted_time: String = local_time.format("%H:%M").to_string();
 
     // Update app with current time
-    update_app(APP_NAME, &formatted_time, APP_ICON).unwrap();
+    update_app(APP_NAME, &formatted_time, APP_ICON, None).unwrap();
 }

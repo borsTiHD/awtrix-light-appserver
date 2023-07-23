@@ -11,5 +11,5 @@ pub fn init() {
     println!("--------------------------");
     println!("Init app: {}", APP_NAME);
     create_app(APP_NAME).unwrap();
-    update_app(APP_NAME, "Pika Pi!", APP_ICON).unwrap();
+    update_app(APP_NAME, "Pika Pi!", APP_ICON, None).unwrap();
 }
