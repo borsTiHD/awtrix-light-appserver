@@ -5,15 +5,17 @@ use std::time::Duration;
 use awtrix_light_appserver::create_app;
 use awtrix_light_appserver::update_app;
 
-// Config
+// App config
+const APP_NAME: &str = "modern_clock";
+const APP_ICON: i32 = 1082; // Specify the app icon
 const SLEEP_DURATION: u64 = 30; // Specify the sleep duration in seconds
 
 // Init function
 pub fn init() {
     // Creating app
     println!("Init clock app...");
-    create_app("modern_clock").unwrap();
-    update_app("modern_clock", "New Clock", 1082).unwrap();
+    create_app(APP_NAME).unwrap();
+    update_app(APP_NAME, "New Clock", APP_ICON).unwrap();
 
     // Thread
     let handle = thread::spawn(|| main()); // Spawn a new thread that runs the main function
@@ -38,5 +40,5 @@ fn update() {
     let formatted_time: String = local_time.format("%H:%M").to_string();
 
     // Update app with current time
-    update_app("modern_clock", &formatted_time, 1082).unwrap();
+    update_app(APP_NAME, &formatted_time, APP_ICON).unwrap();
 }
