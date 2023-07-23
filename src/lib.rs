@@ -16,8 +16,6 @@ const ENDPOINT_CUSTOM: &str = "/custom";
 // Function to create an app
 #[tokio::main]
 pub async fn create_app(app_name: &str) -> Result<(), Box<dyn std::error::Error>> {
-    println!("Creating app {}...", app_name);
-
     // Create a reqwest client
     let client: Client = Client::new();
 
@@ -51,8 +49,6 @@ pub async fn create_app(app_name: &str) -> Result<(), Box<dyn std::error::Error>
 // Function to update an app
 #[tokio::main]
 pub async fn update_app(app_name: &str, app_text: &str, app_icon: i32) -> Result<(), Box<dyn std::error::Error>> {
-    println!("Updating app {}...", app_name);
-
     // Create an instance of the Payload struct with your desired values
     let payload = Payload {
         text: app_text.to_string(),
