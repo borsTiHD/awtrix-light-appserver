@@ -13,9 +13,10 @@ const SLEEP_DURATION: u64 = 30; // Specify the sleep duration in seconds
 // Init function
 pub fn init() {
     // Creating app
-    println!("Init clock app...");
+    println!("--------------------------");
+    println!("Init app: {}", APP_NAME);
     create_app(APP_NAME).unwrap();
-    update_app(APP_NAME, "New Clock", APP_ICON).unwrap();
+    update();
 
     // Thread
     let handle = thread::spawn(|| main()); // Spawn a new thread that runs the main function
@@ -25,7 +26,9 @@ pub fn init() {
 // Main function
 fn main() {
     loop {
-        update(); // Update function
+        println!("--------------------------");
+        println!("Updating app: {}", APP_NAME);    
+        update();
 
         // Introduce a delay between each iteration
         thread::sleep(Duration::from_secs(SLEEP_DURATION));
