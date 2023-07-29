@@ -11,7 +11,39 @@ struct Payload {
 }
 
 // Endpoints
+const ENDPOINT_STATS: &str = "/stats";
 const ENDPOINT_CUSTOM: &str = "/custom";
+
+// Function to get the stats
+#[tokio::main]
+pub async fn get_stats() -> Result<(), Box<dyn std::error::Error>> {
+    // Create a reqwest client
+    let client: Client = Client::new();
+
+    // The URL to which you want to send the GET request
+    let base_url = env::var("BASE_URL").unwrap();
+    let url: String = format!("{}{}", base_url, ENDPOINT_STATS);
+
+    // Send the GET request
+    let response: reqwest::Response = client
+        .get(url)
+        .send()
+        .await?;
+
+    // Check if the request was successful
+    if response.status().is_success() {
+        println!("Request was successful!");
+    } else {
+        println!("Request failed with status code: {}", response.status());
+    }
+
+    // Read the response body as a string
+    let response_body: String = response.text().await?;
+    println!("Response body: {}", response_body);
+    
+    // Return the response body
+    Ok(())
+}
 
 // Function to create an app
 #[tokio::main]
